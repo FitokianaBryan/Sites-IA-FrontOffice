@@ -98,7 +98,7 @@
                                     </div>
                                   </div>
                               <div class="col-md-4">
-                                <img src="{{ $article->image }}" class="card-img" alt="...">
+                                <img src="/{{ $article->image }}" class="card-img" alt="...">
                               </div>
                             </div>
                             <div class="row no-gutters">
@@ -126,15 +126,15 @@
 	</div>
 
 	<!-- core:js -->
-	<script src="assets/vendors/core/core.js"></script>
+	<script src="/assets/vendors/core/core.js"></script>
 	<!-- endinject -->
 	<!-- plugin js for this page -->
-	<script src="assets/vendors/prismjs/prism.js"></script>
-	<script src="assets/vendors/clipboard/clipboard.min.js"></script>
+	<script src="/assets/vendors/prismjs/prism.js"></script>
+	<script src="/assets/vendors/clipboard/clipboard.min.js"></script>
 	<!-- end plugin js for this page -->
 	<!-- inject:js -->
-	<script src="assets/vendors/feather-icons/feather.min.js"></script>
-	<script src="assets/js/template.js');?>"></script>
+	<script src="/assets/vendors/feather-icons/feather.min.js"></script>
+	<script src="/assets/js/template.js');?>"></script>
 	<!-- endinject -->
 	<!-- custom js for this page -->
 	<!-- end custom js for this page -->
