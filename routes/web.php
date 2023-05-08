@@ -27,4 +27,4 @@ Route::post('/ResetPass',UtilisateurController::class . '@ForgetPassword');
 Route::get('/Home',UtilisateurController::class . '@toHome')->name("Home");
 Route::get('/ToSearch',UtilisateurController::class . '@toSearch');
 Route::post('/Search',UtilisateurController::class . '@Search');
-Route::get('/Details/{id}',UtilisateurController::class . '@getDetails');
+Route::get('/Details/{slug}',UtilisateurController::class . '@getDetails');

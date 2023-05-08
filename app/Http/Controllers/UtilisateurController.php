@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+
 
 
 use App\Services\UtilsService;
@@ -85,9 +87,17 @@ class UtilisateurController extends Controller
         ]);
     }
 
-    public function getDetails($id) {
-        return view('Details',[
-            'article' => Article::find($id)
-        ]);
+    public function getDetails($slug) {
+        $titre = basename($slug,'.html');
+        $articles = Article::all();
+        foreach($articles as $article) {
+            if($article->getSlugtitle() == $titre) {
+                return view('Details',[
+                    'article' => $article
+                ]);
+            }
+            else abort(404);
+        }
+
     }
 }
