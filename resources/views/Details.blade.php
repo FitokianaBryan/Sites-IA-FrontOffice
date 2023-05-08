@@ -98,7 +98,7 @@
                                     </div>
                                   </div>
                               <div class="col-md-4">
-                                <img src="<?php echo asset($article->image);?>" class="card-img" alt="...">
+                                <img src="{{ $article->image }}" class="card-img" alt="...">
                               </div>
                             </div>
                             <div class="row no-gutters">
