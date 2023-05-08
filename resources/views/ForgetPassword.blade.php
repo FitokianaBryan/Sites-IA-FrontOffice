@@ -37,7 +37,7 @@
                   <div class="auth-form-wrapper px-4 py-5">
                     <a href="{{ url('/') }}" class="noble-ui-logo d-block mb-2">Mada<span>News</span></a>
                     <h5 class="text-muted font-weight-normal mb-4">Mot de passe oublié? Suivez les étapes suivantes.</h5>
-                    <form class="forms-sample" action="{{ url('/ResetPass') }}" method="post">
+                    <form class="forms-sample" action="/ResetPass" method="post">
                         {{ csrf_field() }}
                       <div class="form-group">
                         <label for="exampleInputEmail1">Email</label>

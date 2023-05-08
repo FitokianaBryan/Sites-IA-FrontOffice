@@ -6,19 +6,19 @@
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>Détails</title>
 	<!-- core:css -->
-	<link rel="stylesheet" href="assets/vendors/core/core.css">
+	<link rel="stylesheet" href="/assets/vendors/core/core.css">
 	<!-- endinject -->
 	<!-- plugin css for this page -->
-	<link rel="stylesheet" href="assets/vendors/prismjs/themes/prism.css">
+	<link rel="stylesheet" href="/assets/vendors/prismjs/themes/prism.css">
 	<!-- end plugin css for this page -->
 	<!-- inject:css -->
-	<link rel="stylesheet" href="assets/fonts/feather-font/css/iconfont.css">
-	<link rel="stylesheet" href="assets/vendors/flag-icon-css/css/flag-icon.min.css">
+	<link rel="stylesheet" href="/assets/fonts/feather-font/css/iconfont.css">
+	<link rel="stylesheet" href="/assets/vendors/flag-icon-css/css/flag-icon.min.css">
 	<!-- endinject -->
   <!-- Layout styles -->  
-	<link rel="stylesheet" href="assets/css/demo_5/style.css">
+	<link rel="stylesheet" href="/assets/css/demo_5/style.css">
   <!-- End layout styles -->
-  <link rel="shortcut icon" href="assets/images/favicon.png" />
+  <link rel="shortcut icon" href="/assets/images/favicon.png" />
 </head>
 <body>
 	<div class="main-wrapper">
@@ -91,14 +91,16 @@
                                       <h5 class="card-title">{{ $article->titre }}</h5>
                                       <p class="card-text">{{ $article->resume}}</p>
                                       <p class="cart-text"><small class="text-muted">Publié par : {{ $article->getAuteur()->nom }} {{ $article->getAuteur()->prenom }}</small></p>
+                                      @if($article->getPublication()->publish_at !== null) 
                                       <p class="card-text"> <small class="text-muted">Publié le : {{ $article->getPublication()->publish_at }}</small></p>
+                                      @endif
                                       @if($article->getPublication()->update_at !== null)
                                       <p class="card-text"><small class="text-muted">Modifié le : {{ $article->getPublication()->update_at }}</small></p>
                                       @endif
                                     </div>
                                   </div>
                               <div class="col-md-4">
-                                <img src="/{{ $article->image }}" class="card-img" alt="...">
+                                <img src="{{ $article->image }}" style="border-raduis: 5px;" class="card-img" alt="...">
                               </div>
                             </div>
                             <div class="row no-gutters">

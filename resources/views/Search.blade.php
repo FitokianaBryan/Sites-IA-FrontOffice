@@ -90,32 +90,33 @@
                                       <p class="card-text">Recherchez un article, un éditorial, une chronique, une vidéo ou une archive parmi l’ensemble des publications du journal. Nos pages archives sont également disponibles pour une consultation par date.</p>
                                       <hr style="border: 2px solid #6c757d;"/>
                                       <h4 class="page-title">Saisissez votre recherche</h4><br>
-                                      <form action="{{ url('/Search') }}" method="POST" class="forms-sample">
-                                        {{ csrf_field() }}
-                                        <div class="form-group">
-                                            <label class="control-label">Titre</label>
-                                            <input type="text" name="titre" class="form-control" placeholder="titre">
-                                        </div>
-                                        <div class="row">
-											<div class="col-sm-6">
-                                                <div class="form-group">
-                                                    <label class="control-label">Résumé</label>
-                                                    <textarea name="resume" class="form-control"></textarea>
-                                                </div>
+									  <form action="/Search" method="POST" class="forms-sample">
+                                    {{ csrf_field() }}
+									<div class="form-group">
+										<label for="exampleInputUsername1">Catégorie</label>
+										<input type="text" name="categorie" class="form-control" id="exampleInputUsername1" autocomplete="off" placeholder="Catégorie">
+									</div>
+									<div class="form-group">
+										<label for="exampleInputEmail1">Un texte</label>
+										<textarea class="form-control" name="texte" rows="6"></textarea>
+									</div>
+                                    <h5 class="card-text text-muted">Chercher à partir de dates</h5><br>
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label class="control-label">Instant 1</label>
+                                                <input type="datetime-local" name="publish_at_1" class="form-control">
                                             </div>
-											<div class="col-sm-6">
-                                                <div class="form-group">
-                                                    <label class="control-label">Contenue</label>
-                                                    <textarea name="contenu" class="form-control"></textarea>
-                                                </div>
+                                        </div><!-- Col -->
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label class="control-label">Instant 2</label>
+                                                <input type="datetime-local" name="publish_at_2" class="form-control">
                                             </div>
-                                        </div>
-                                        <div class="mt-3">
-                                            <div class="mt-3">
-                                                <button type="submit" class="btn btn-dark">Rechercher</button>
-                                            </div>
-                                          </div>
-                                      </form>
+                                        </div><!-- Col -->
+                                    </div><!-- Row -->
+									<button type="submit" class="btn btn-primary mr-2">Rechercher</button>
+								</form>
                                     </div>
 
                                 </div>
@@ -132,13 +133,15 @@
                                           <h5 class="card-title">{{ $article->titre }}</h5>
                                           <p class="card-text">{{ $article->resume }}</p>
                                           <p class="card-text"> <small class="text-muted">Publié le : {{ $article->getPublication()->publish_at}}     Modifié le : {{ $article->getPublication()->update_at }}</small>       <small>Laurent Lefevre</small></p>
-                                          <a class="btn btn-outline-primary btn-icon-text mb-2 mb-md-0" href="{{ url('/Details') }}/{{ $article->id }}" role="button">détails</a>
+                                          <a class="btn btn-outline-primary btn-icon-text mb-2 mb-md-0" href="{{ url('/Details') }}/{{ $article->getSlugtitle() }}_{{ $article->id }}.html" role="button">détails</a>
                                           <hr/>
                                     @endforeach
+								
+									<br>{!! $links !!}
                                     </div>
+
                                 </div>
                             </div>
-                            {!! $links !!}
                             @endif
                           </div>
                     </div>

@@ -21,7 +21,7 @@ class UtilisateurController extends Controller
         $user = Utilisateur::where('email',$request->input('email'))->where('password',md5($request->input('password')));
         if($user->exists()) {
             session()->put('user',$user->first()->id);
-            return redirect()->route("Home");
+            return redirect()->route('Home');
         }
         else return redirect()->back()->with('Error','Email ou mot de passe incorrect!');
     }
@@ -57,6 +57,7 @@ class UtilisateurController extends Controller
         $list = Article::join('publication', 'article.id', '=', 'publication.idarticle')
                ->where('publication.etat', '=', 1)
                ->orderBy('publication.publish_at', 'desc')
+               ->select('article.*')
                ->simplePaginate($limit);
         return view('Home',[
             'liste_article' => $list,
@@ -72,32 +73,42 @@ class UtilisateurController extends Controller
     }
 
     public function Search(Request $request) {
-        $article = new Article();
-        $article->categorie = $request->input('categorie');
-        $article->titre = $request->input('titre');
-        $article->contenu = $request->input('texte');
-        $article->resume = $request->input('texte');
-        $result = UtilsService::Search($article)->join('publication', 'article.id', '=', 'publication.idarticle')
-        ->where('publication.etat', '=', 1)
-        ->orderBy('publication.publish_at', 'desc')
-        ->simplePaginate(6);
+        $query = Article::select('*')
+        ->join('publication', 'article.id', '=', 'publication.idarticle');
+        if ($request->filled('categorie')) {
+            $query->where('categorie', 'like', '%' . $request->input('categorie') . '%');
+        }
+
+        if ($request->filled('texte')) {
+            $query->where(function($q) use ($request) {
+                $q->where('titre', 'like', '%' . $request->input('texte') . '%')
+                ->orWhere('resume', 'like', '%' . $request->input('texte') . '%')
+                ->orWhere('contenu', 'like', '%' . $request->input('texte') . '%');
+            });
+        }
+
+        if ($request->filled('publish_at_1')) {
+            $query->where('publication.publish_at', '>=', $request->input('publish_at_1'));
+        }
+
+        if ($request->filled('publish_at_2')) {
+            $query->where('publication.publish_at', '<=', $request->input('publish_at_2'));
+        }
+        $articles = $query->simplePaginate(6);
         return view('Search',[
-            'liste_article' => $result,
-            'links' => $result->links()
+            'liste_article' => $articles,
+            'links' => $articles->links()
         ]);
     }
 
     public function getDetails($slug) {
-        $titre = basename($slug,'.html');
-        $articles = Article::all();
-        foreach($articles as $article) {
-            if($article->getSlugtitle() == $titre) {
-                return view('Details',[
-                    'article' => $article
-                ]);
-            }
-            else abort(404);
+        $file_without_extension = basename($slug, ".html"); // renvoie "un-titre-très-long_unid"
+        $idarticle = substr(strrchr($file_without_extension, "_"), 1);
+        $article =  Article::find(intval($idarticle));
+        if($article!==null) {
+            return view('Details',['article' => $article]);
         }
+        else abort(404);
 
     }
 }

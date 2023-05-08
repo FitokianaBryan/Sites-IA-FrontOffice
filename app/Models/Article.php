@@ -23,7 +23,8 @@ class Article extends Model
 
     public function getPublication() {
         $publication = Publication::where('idarticle',$this->attributes['id'])->first();
-        return $publication;
+        if($publication) return $publication;
+        else return new Publication();
     }
 
     public function getLastNews() {

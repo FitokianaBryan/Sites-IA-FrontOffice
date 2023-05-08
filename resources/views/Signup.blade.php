@@ -37,7 +37,7 @@
                   <div class="auth-form-wrapper px-4 py-5">
                     <a href="{{ url('/') }}" class="noble-ui-logo d-block mb-2">Mada<span>News</span></a>
                     <h5 class="text-muted font-weight-normal mb-4">Créer un compte gratuit.</h5>
-                    <form class="forms-sample" action="{{ url('/Signup') }}" method="post">
+                    <form class="forms-sample" action="/Signup" method="post">
                         {{ csrf_field() }}
                         <div class="row">
                             <div class="col-sm-6">

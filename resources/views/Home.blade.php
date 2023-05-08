@@ -16,9 +16,9 @@
 	<link rel="stylesheet" href="/assets/vendors/flag-icon-css/css/flag-icon.min.css">
 	<!-- endinject -->
   <!-- Layout styles -->  
-	<link rel="stylesheet" href="/assets/css/demo_5/style.css>">
+	<link rel="stylesheet" href="/assets/css/demo_5/style.css">
   <!-- End layout styles -->
-  <link rel="shortcut icon" href="/assets/images/favicon.png>" />
+  <link rel="shortcut icon" href="/assets/images/favicon.png" />
 </head>
 <body>
 	<div class="main-wrapper">
@@ -88,7 +88,7 @@
 						<div class="card mb-3">
               <div class="row no-gutters">
                 <div class="col-md-4">
-                  <img src="https://sites-ia-backoffice-production.up.railway.app/{{ $article->image }}" class="card-img" alt="...">
+                  <img src="{{ $article->image }}" style="border-raduis: 5px;" class="card-img" alt="...">
                 </div>
                   <div class="col-md-8">
                     <div class="card-body">
@@ -101,7 +101,7 @@
                         <small class="text-muted"> Dernière modification : {{ $article->getPublication()->update_at }}</small> 
                     @endif
                     <small style="float: right;">{{ $article->getAuteur()->nom }} {{ $article->getAuteur()->prenom}}</small></p><br>
-                        <a class="btn btn-primary" href="{{ url('/Details') }}/{{ $article->id }}" role="button">détails</a>
+                        <a class="btn btn-primary" href="{{ url('/Details') }}/{{ $article->getSlugtitle() }}_{{ $article->id }}.html" role="button">détails</a>
                       
                     </div>
                   </div>
