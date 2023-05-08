@@ -132,7 +132,7 @@
                                           <!-- <h6 class="card-subtitle mb-2 text-muted">Enquete</h6> -->
                                           <h5 class="card-title">{{ $article->titre }}</h5>
                                           <p class="card-text">{{ $article->resume }}</p>
-                                          <p class="card-text"> <small class="text-muted">Publié le : {{ $article->getPublication()->publish_at}}     Modifié le : {{ $article->getPublication()->update_at }}</small>       <small>Laurent Lefevre</small></p>
+                                          <p class="card-text"> <small class="text-muted">Publié le : {{ $article->getPublication()->publish_at}}     Modifié le : {{ $article->getPublication()->update_at }}</small>       <small>{{ $article->getAuteur()->nom }} {{ $article->getAuteur()->prenom }}</small></p>
                                           <a class="btn btn-outline-primary btn-icon-text mb-2 mb-md-0" href="{{ url('/Details') }}/{{ $article->getSlugtitle() }}_{{ $article->id }}.html" role="button">détails</a>
                                           <hr/>
                                     @endforeach
