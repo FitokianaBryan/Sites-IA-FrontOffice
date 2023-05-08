@@ -19,10 +19,7 @@ class UtilisateurController extends Controller
         $user = Utilisateur::where('email',$request->input('email'))->where('password',md5($request->input('password')));
         if($user->exists()) {
             session()->put('user',$user->first()->id);
-            return view('Home',[
-                'liste_article' => $list,
-                'links' => $list->links()
-            ]);
+            return redirect()->route("Home");
         }
         else return redirect()->back()->with('Error','Email ou mot de passe incorrect!');
     }
